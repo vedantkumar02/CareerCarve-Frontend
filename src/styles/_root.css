@@ -1,0 +1,40 @@
+:root {
+    --fw-extralight: 200;
+    --fw-light: 300;
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+
+    --fs-xs: 0.75rem;
+    --fs-sm: 0.875rem;
+    --fs-base: 1rem;
+    --fs-lg: 1.125rem;
+    --fs-xl: 1.25rem;
+    --fs-2xl: 1.5rem;
+    --fs-3xl: 1.875rem;
+    --fs-4xl: 2.25rem;
+
+    --ff-inter: "Inter", sans-serif;
+
+    --color-white: 0, 0%, 100%; /* --[#FFFFFF]-- */
+    --color-black: 0, 0%, 0%; /* --[#000000]-- */
+    --color-page-bg: 0, 0%, 100%; /* --[#FFFFFF]-- */
+    --color-border-stroke: 0 0% 90%; /* --[#E6E6E6]-- */
+    --color-input-outline: 0, 0%, 25%; /* --[#414141]-- */
+    --color-btns-primary: 293, 34%, 43%; /* --[#8A4893]-- */
+    --color-text: 0 0% 10%; /* --[#191919]-- */
+    --color-toggle-handle-active: 259, 58%, 28%; /* --[#381E72]-- */
+    --color-toggle-track-active: 258, 100%, 87%; /* --[#D0BCFF]-- */
+    --color-toggle-handle-disabled: 0, 0%, 55%; /* --[#8B8B8B]-- */
+
+    --color-success: 108 62% 55%; /* --[#61D345]-- */
+    --color-error: 0 100% 65%; /* --[#FF4B4B]-- */
+    --color-warning: 47 100% 62%; /* --[#FFD43B]-- */
+    --color-info: 265 86% 47%; /* --[#6611DD]-- */
+
+    --padding-app-inline: 4rem;
+    --padding-app-block: 4rem;
+
+    --line-height-base: 1.35;
+}

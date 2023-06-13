@@ -1,0 +1,25 @@
+.homepage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    padding-block: var(--padding-app-block);
+    padding-inline: var(--padding-app-inline);
+}
+
+.pageTitle {
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-medium);
+}
+
+.sectionContainer {
+    width: 100%;
+    max-width: 53.125rem;
+}
+
+.btnContainer {
+    width: max-content;
+    margin-block: 2.5rem;
+    margin-inline: auto;
+}

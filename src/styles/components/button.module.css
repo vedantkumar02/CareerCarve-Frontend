@@ -1,0 +1,14 @@
+.btnPrimary {
+    color: hsl(var(--color-white));
+    background: hsl(var(--color-btns-primary), 0.9);
+    padding-block: 0.75em;
+    padding-inline: 1em;
+    width: 24rem;
+    border-radius: 10px;
+    transition: background 100ms linear;
+}
+
+.btnPrimary:hover {
+    background-color: hsl(var(--color-btns-primary));
+    transition: background 100ms linear;
+}
