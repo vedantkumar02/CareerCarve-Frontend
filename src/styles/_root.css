@@ -38,3 +38,10 @@
 
     --line-height-base: 1.35;
 }
+
+@media screen and (max-width: 40em) {
+    :root {
+        --padding-app-inline: 2rem;
+        --padding-app-block: 2rem;
+    }
+}

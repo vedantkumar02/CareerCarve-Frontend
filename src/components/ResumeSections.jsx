@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { componentStyles } from "../styles";
 import { IoCheckmarkCircle, IoCloseCircleSharp } from "react-icons/io5";
-// import { GoCheckCircleFill } from "react-icons/go";
 import { MdOutlineEdit, MdOutlineInfo, MdOutlineMenu } from "react-icons/md";
 
 /* ----- Style Classes ----- */
 const {
     actionBtns,
+    currentDraggable,
     editBtns,
     editIcon,
     infoIcon,
@@ -20,21 +20,86 @@ const {
     toggleInputWrap,
 } = componentStyles.resumeSectionStyles;
 
-export const ResumeSections = (props) => {
+export const ResumeSections = ({
+    id,
+    section,
+    setRenderSectionList,
+    dragItemRef,
+    dragOverItemRef,
+}) => {
+    const { name, active } = section;
+
     const [contentEditable, setContentEditable] = useState(false);
-    const [editedContent, setEditedContent] = useState(props.sectionName);
+    const [editedContent, setEditedContent] = useState(name);
     const [toggleInfo, setToggleInfo] = useState(false);
-    const [sectionActive, setSectionActive] = useState(props.active);
+    const [sectionActive, setSectionActive] = useState(active);
+    const [draggableItem, setDraggableItem] = useState(false);
+
+    const onDragStart = () => (dragItemRef.current = id);
+
+    const onDragEnter = () => {
+        if (id !== dragItemRef.current) {
+            dragOverItemRef.current = id;
+        }
+    };
+
+    const onDragEnd = () => {
+        setRenderSectionList((currentList) => {
+            let modifiedList = [...currentList];
+
+            const draggedItemContent = modifiedList.splice(
+                dragItemRef.current,
+                1
+            )[0];
+
+            modifiedList.splice(dragOverItemRef.current, 0, draggedItemContent);
+
+            dragItemRef.current = null;
+            dragOverItemRef.current = null;
+            setDraggableItem(false);
+
+            return modifiedList;
+        });
+    };
+
+    const onDragOver = (event) => event.preventDefault();
+
+    useEffect(() => {
+        setEditedContent(name);
+        setSectionActive(active);
+    }, [name, active]);
+
+    useEffect(() => {
+        setRenderSectionList((currentList) => {
+            let newList = [...currentList];
+            newList[id].name = editedContent;
+            newList[id].active = sectionActive;
+
+            return newList;
+        });
+    }, [id, editedContent, sectionActive, setRenderSectionList]);
 
     return (
-        <div className={resumeSections} draggable={true}>
-            <button className={actionBtns}>
+        <div
+            className={`${resumeSections} ${
+                draggableItem ? currentDraggable : ""
+            }`}
+            draggable={draggableItem}
+            onDragStart={onDragStart}
+            onDragEnter={onDragEnter}
+            onDragEnd={onDragEnd}
+            onDragOver={onDragOver}
+        >
+            <button
+                className={actionBtns}
+                onClick={() => setDraggableItem(!draggableItem)}
+            >
                 <MdOutlineMenu className={menuIcon} />
             </button>
             <button
                 tabIndex={0}
                 className={actionBtns}
-                onFocus={() => setToggleInfo(true)}
+                onClick={() => setToggleInfo(!toggleInfo)}
                 onBlur={() => setToggleInfo(false)}
             >
                 <MdOutlineInfo className={infoIcon} />
@@ -53,7 +118,7 @@ export const ResumeSections = (props) => {
                 suppressContentEditableWarning={true}
                 onBlur={(event) => setEditedContent(event.target.textContent)}
             >
-                {props.sectionName}
+                {name}
             </p>
             {!contentEditable ? (
                 <button
@@ -74,7 +139,7 @@ export const ResumeSections = (props) => {
                 <input
                     type="checkbox"
                     name="toggleSection"
-                    id={`toggleSection_${props.id}`}
+                    id={`toggleSection_${id}`}
                     checked={sectionActive}
                     className={`${toggleInput} ${
                         sectionActive ? toggleInputActive : ""
@@ -83,10 +148,7 @@ export const ResumeSections = (props) => {
                         setSectionActive(event.target.checked);
                     }}
                 />
-                <label
-                    htmlFor={`toggleSection_${props.id}`}
-                    className={toggleLabel}
-                >
+                <label htmlFor={`toggleSection_${id}`} className={toggleLabel}>
                     {sectionActive ? (
                         <IoCheckmarkCircle />
                     ) : (

@@ -18,8 +18,28 @@
     max-width: 53.125rem;
 }
 
+.sectionContainer:has(p[contentEditable="true"])
+    > div:not(:has(p[contentEditable="true"]))::after {
+    background: #b6b6b6 !important;
+}
+
 .btnContainer {
-    width: max-content;
+    width: 100%;
     margin-block: 2.5rem;
-    margin-inline: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.spinner {
+    font-size: 1.35rem;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

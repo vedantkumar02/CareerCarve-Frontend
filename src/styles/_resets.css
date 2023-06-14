@@ -173,7 +173,8 @@ button {
 
 button:disabled {
     cursor: not-allowed;
-    opacity: 0.8;
+    opacity: 0.6 !important;
+    background: hsl(var(--color-btns-primary), 0.8) !important;
 }
 
 /* ----- Media Queries ----- */

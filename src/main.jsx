@@ -4,8 +4,4 @@ import { App } from "./App";
 import "./styles/_root.css";
 import "./styles/_resets.css";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>
-);
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
